@@ -16,6 +16,7 @@ export default function Profile() {
       setUser(res.data);
     };
     fetchUser();
+    console.log(user.coverPicture);
   }, [username]);
 
   return (
