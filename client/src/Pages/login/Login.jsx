@@ -20,7 +20,7 @@ export default function Login() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Valanty</h3>
+          <h3 className="loginLogo">𝒱𝒶𝓁𝒶𝓃𝓉𝓎</h3>
           <span className="loginDesc">
             Connect with friends and the world around you on Valanty.
           </span>

@@ -70,7 +70,7 @@ export default function Post({ post, username }) {
             />
             <img
               className="likeIcon"
-              src={`${PF}/heart.jpg`}
+              src={`${PF}/heart.png`}
               onClick={likeHandler}
               alt=""
             />
