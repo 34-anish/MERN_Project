@@ -12,7 +12,7 @@ export default function Feed({ username }) {
       console.log(username);
       const res = username
         ? await axios.get("/posts/profile/" + username)
-        : await axios.get("posts/timeline/6245a3131c3691804aad487b");
+        : await axios.get("posts/timeline/623c3961193beeb0afad2a08");
       setPosts(res.data);
     };
     fetchPosts();
@@ -23,7 +23,7 @@ export default function Feed({ username }) {
       <div className="feedWrapper">
         <Share />
         {posts.map((p) => (
-          <Post key={p._id} post={p} />
+          <Post key={p._id} post={p} username={username} />
         ))}
       </div>
     </div>

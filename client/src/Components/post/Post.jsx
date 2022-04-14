@@ -6,7 +6,7 @@ import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 
-export default function Post({ post }) {
+export default function Post({ post, username }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [like, setLike] = useState(post.like);
   const [isLiked, setIsLiked] = useState(false);
@@ -31,10 +31,11 @@ export default function Post({ post }) {
             <Link to={`profile/${user.username}`}>
               <img
                 className="postProfileImg"
-                src={user.profilePicture || PF + "no_pp.jpg"}
+                src={PF + user.profilePicture || PF + "no_pp.jpg"}
                 alt=""
               />
             </Link>
+
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
@@ -50,13 +51,13 @@ export default function Post({ post }) {
           <div className="postBottomLeft">
             <img
               className="likeIcon"
-              src="assets/like.png"
+              src={`${PF}/like.png`}
               onClick={likeHandler}
               alt=""
             />
             <img
               className="likeIcon"
-              src="assets/heart.jpg"
+              src={`${PF}/heart.jpg`}
               onClick={likeHandler}
               alt=""
             />
