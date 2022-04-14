@@ -12,8 +12,10 @@ export default function Register() {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    console.log("CLICKED");
     if (passwordAgain.current.value !== password.current.value) {
-      passwordAgain.current.setCustomValidity("Passwords don't match!");
+      password.current.setCustomValidity("Passwords don't match!");
+      console.log("Passwords Dont match ");
     } else {
       const user = {
         username: username.current.value,
@@ -22,7 +24,7 @@ export default function Register() {
       };
       try {
         await axios.post("/auth/register", user);
-        history.push("/login");
+        history("/login");
       } catch (err) {
         console.log(err);
       }
@@ -33,9 +35,9 @@ export default function Register() {
     <div className="login">
       <div className="loginWrapper">
         <div className="loginLeft">
-          <h3 className="loginLogo">Lamasocial</h3>
+          <h3 className="loginLogo">Valanty</h3>
           <span className="loginDesc">
-            Connect with friends and the world around you on Lamasocial.
+            Connect with friends and the world around you on Valanty.
           </span>
         </div>
         <div className="loginRight">
