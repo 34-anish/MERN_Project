@@ -37,31 +37,27 @@ export default function Topbar() {
         </div>
       </div>
       <div className="topbarIcons">
-        <div className="topbarIconItem">
+       <Link to={"/profile/" + user.username} style={linkStyle}>
+         <div className="topbarIconItem">
           <PersonIcon />
-          <span className="topbarIconBadge">1</span>
-        </div>
+        
+         </div>
+        </Link>
       </div>
       <div className="topbarIcons">
+      <Link to={"/messenger/"} style={linkStyle}> 
         <div className="topbarIconItem">
           <ChatIcon />
-          <span className="topbarIconBadge">1</span>
+    
         </div>
+        </Link>
       </div>
       <div className="topbarIcons">
         <div className="topbarIconItem">
           <NotificationsIcon />
-          <span className="topbarIconBadge">1</span>
+   
         </div>
-        <Link to={`/profile/${user.username}`}>
-          <img
-            src={
-              user.profilePicture ? PF + user.profilePicture : PF + "no_pp.jpg"
-            }
-            alt="Picture"
-            className="topbarImg"
-          />
-        </Link>
+      
       </div>
     </div>
   );
