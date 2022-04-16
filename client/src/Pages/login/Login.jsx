@@ -3,7 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { loginCall } from "../../apiCalls";
 import { useContext, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
-
+import { Link } from "react-router-dom";
 export default function Login() {
   const email = useRef();
   const password = useRef();
@@ -48,12 +48,14 @@ export default function Login() {
                 "Log In"
               )}
             </button>
-            <span className="loginForgot">Forgot Password?</span>
+            {/* <span className="loginForgot">Forgot Password?</span> */}
             <button className="loginRegisterButton">
               {isFetching ? (
                 <CircularProgress color="inherit" size="25px" />
               ) : (
-                "              Create a New Account"
+                <Link to="/register" style={{ textDecoration: "none" }}>
+                  Create a New Account
+                </Link>
               )}
             </button>
           </form>

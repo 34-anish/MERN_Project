@@ -48,7 +48,6 @@ export default function Post({ post, username }) {
                 alt=""
               />
             </Link>
-
             <span className="postUsername">{user.username}</span>
             <span className="postDate">{format(post.createdAt)}</span>
           </div>

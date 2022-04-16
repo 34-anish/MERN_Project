@@ -9,6 +9,10 @@ import { AuthContext } from "../../context/AuthContext";
 export default function Topbar() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const linkStyle = {
+    textDecoration: "none",
+    color: "white",
+  };
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
@@ -24,8 +28,12 @@ export default function Topbar() {
       </div>
       <div className="topbarRight">
         <div className="topbarLinks">
-          <span className="topbarLink">Homepage</span>
-          <span className="topbarLink">Timeline</span>
+          <Link to="/" style={linkStyle}>
+            <span className="topbarLink">Homepage</span>
+          </Link>
+          <Link to={"/profile/" + user.username} style={linkStyle}>
+            <span className="topbarLink">Timeline</span>
+          </Link>
         </div>
       </div>
       <div className="topbarIcons">
