@@ -15,7 +15,7 @@ export default function Rightbar({ user }) {
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [onlineUsers, setOnlineUsers] = useState([]);
- 
+
   // console.log(user);
   // console.log(currentUser);
   // console.log(currentUser.followings.includes(user._id));
@@ -23,7 +23,7 @@ export default function Rightbar({ user }) {
   const [followed, setFollowed] = useState(
     currentUser.followings.includes(user?._id)
   );
-  // console.log(user._id);
+  console.log(currentUser);
   useEffect(() => {
     const getFriends = async () => {
       try {
@@ -38,7 +38,6 @@ export default function Rightbar({ user }) {
   }, [user]);
 
   const handleClick = async () => {
-    
     try {
       if (followed) {
         await axios.put(`/users/${user._id}/unfollow`, {
@@ -50,6 +49,11 @@ export default function Rightbar({ user }) {
           userId: currentUser._id,
         });
         dispatch({ type: "FOLLOW", payload: user._id });
+        await axios.post(`/conversations/`, {
+          senderId: currentUser._id,
+          receiverId: user._id,
+        });
+        // console.log(user, currentUser);
       }
       setFollowed(!followed);
     } catch (err) {}
@@ -59,9 +63,7 @@ export default function Rightbar({ user }) {
     return (
       <>
         <h4 className="rightbarTitle">Online Friends</h4>
-        <ul className="rightbarFriendList">
-   
-        </ul>
+        <ul className="rightbarFriendList"></ul>
       </>
     );
   };
