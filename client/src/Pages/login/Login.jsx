@@ -53,7 +53,7 @@ export default function Login() {
               {isFetching ? (
                 <CircularProgress color="inherit" size="25px" />
               ) : (
-                <Link to="/register" style={{ textDecoration: "none" }}>
+                <Link to="/register" style={{ textDecoration: "none" , color : "white"}}>
                   Create a New Account
                 </Link>
               )}
