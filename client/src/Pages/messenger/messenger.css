@@ -44,16 +44,16 @@
     padding: 10px;
   }
   
-  .chatSubmitButton {
+  
+  .chatSubmitButton{
     width: 70px;
     height: 40px;
-    border: none;
-    border-radius: 5px;
+    border:none;
+    border-radius: 35%;
     cursor: pointer;
-    background-color: teal;
-    color: white;
+    background-color: rgb(247, 97, 140);
+    color: black;
   }
-  
   .chatOnline {
     flex: 3;
   }

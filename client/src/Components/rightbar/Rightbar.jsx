@@ -1,6 +1,7 @@
 import "./rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
+import ChatOnline from "../../Components/chatOnline/ChatOnline";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -8,11 +9,13 @@ import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+
 export default function Rightbar({ user }) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
   const { user: currentUser, dispatch } = useContext(AuthContext);
-
+  const [onlineUsers, setOnlineUsers] = useState([]);
+ 
   // console.log(user);
   // console.log(currentUser);
   // console.log(currentUser.followings.includes(user._id));
@@ -54,20 +57,9 @@ export default function Rightbar({ user }) {
   const HomeRightBar = () => {
     return (
       <>
-        <div className="birthdayContainer">
-          <img className="birthdayImg" src="assets/gift.png" alt="" />
-          <span className="birthdayText">
-            <b>Pola Foster</b> and <b>3 other friends</b> have a birhday today.
-          </span>
-        </div>
-        {/* Ad */}
-        <img className="rightbarAd" src="assets/ad.jpg" alt="" />
-
         <h4 className="rightbarTitle">Online Friends</h4>
         <ul className="rightbarFriendList">
-          {Users.map((u) => (
-            <Online key={u.id} user={u} />
-          ))}
+   
         </ul>
       </>
     );
