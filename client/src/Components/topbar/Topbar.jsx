@@ -3,6 +3,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
 import ChatIcon from "@mui/icons-material/Chat";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import MeetingRoomIcon from '@mui/icons-material/MeetingRoom';
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -57,7 +58,11 @@ export default function Topbar() {
           <NotificationsIcon />
    
         </div>
-      
+        <div className="topbarIcons">
+        <div className="topbarIconItem">
+          < MeetingRoomIcon/>
+         </div> 
+      </div>
       </div>
     </div>
   );

@@ -38,6 +38,7 @@ export default function Rightbar({ user }) {
   }, [user]);
 
   const handleClick = async () => {
+    
     try {
       if (followed) {
         await axios.put(`/users/${user._id}/unfollow`, {
