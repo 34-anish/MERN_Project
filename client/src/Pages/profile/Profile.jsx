@@ -1,12 +1,14 @@
 import "./profile.css";
+import {useContext} from 'react';
 import Topbar from "../../Components/topbar/Topbar";
 import Sidebar from "../../Components/sidebar/Sidebar";
 import Feed from "../../Components/feed/Feed";
 import Rightbar from "../../Components/rightbar/Rightbar";
+import { AuthContext } from "../../context/AuthContext";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router";
-export default function Profile() {
+export default function Profile({currentUser}) {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [user, setUser] = useState({});
   const username = useParams().username;
@@ -53,7 +55,7 @@ export default function Profile() {
           </div>
           <div className="profileRightBottom">
             <Feed username={username} />
-            <Rightbar user={user} />
+            <Rightbar user={username}/>
           </div>
         </div>
       </div>

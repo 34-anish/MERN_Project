@@ -100,13 +100,46 @@ export default function Messenger() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
+  const searchFriends = async (event) => {
+
+    console.log(user._id);
+    let data = event.target.value; 
+    if (data == "") {
+        const res = await axios.get("/conversations/" + user._id);
+        setConversations(res.data);
+        return;
+    }
+
+    let filteredConnections  = [];
+    let friendId = conversations.map((c) => c.members.find((m) => m !== user._id));
+    let friendNames = [];
+     for (let i of friendId)  {
+       const friendName = await axios("/users?userId=" + i);
+       console.log(friendName.data.username);
+       friendNames.push(friendName.data.username);
+    }
+      let filteredFriends = friendNames.filter((s,i) => {
+        if (s.startsWith(data)){
+          filteredConnections.push(friendId[i]);
+          return true;
+        }
+      });
+    console.log(filteredConnections);
+    setConversations(conversations.filter((s) => {
+        let username = s.members.find((m) => m !== user._id);
+        return filteredConnections.includes(username);
+    }));
+    
+  };
+
+
   return (
     <>
       <Topbar />
       <div className="messenger">
         <div className="chatMenu">
           <div className="chatMenuWrapper">
-            <input placeholder="Search for friends" className="chatMenuInput" />
+            <input placeholder="Search for friends" className="chatMenuInput" onChange={searchFriends} />
             {conversations.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />

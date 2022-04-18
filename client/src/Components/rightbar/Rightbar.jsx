@@ -7,12 +7,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import {useNavigate} from 'react-router-dom';
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-export default function Rightbar({ user }) {
+export default function Rightbar({ user}) {
+  let navigate = useNavigate();
+
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
+  const [anotherUser,setAnotherUser] = useState({});
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -20,10 +24,26 @@ export default function Rightbar({ user }) {
   // console.log(currentUser);
   // console.log(currentUser.followings.includes(user._id));
 
-  const [followed, setFollowed] = useState(
-    currentUser.followings.includes(user?._id)
-  );
-  console.log(currentUser);
+  const [followed, setFollowed] = useState();
+
+
+  useEffect(() => {
+    console.log("from right bar " + currentUser._id);
+    console.log(user);
+    setFollowed(
+    (async function checkFollow() {
+      let isFollowing = await currentUser.followings.includes(user?._id);
+      return isFollowing;
+    })()
+    );
+
+    const fetchUser = async () => {
+      const res = await axios.get(`/users/?username=${user}`);
+      setAnotherUser(res.data);
+    };
+    fetchUser(); 
+  }, []);
+
   useEffect(() => {
     const getFriends = async () => {
       try {
@@ -40,6 +60,7 @@ export default function Rightbar({ user }) {
   const handleClick = async () => {
     try {
       if (followed) {
+        console.log("already followed");
         await axios.put(`/users/${user._id}/unfollow`, {
           userId: currentUser._id,
         });
@@ -67,6 +88,19 @@ export default function Rightbar({ user }) {
       </>
     );
   };
+  const messageUser = async () => {
+    console.log("messaging now");
+    console.log(currentUser._id);
+    console.log(anotherUser._id);
+    await axios.post(`/conversations/`, {
+        "senderId": currentUser._id,
+        "receiverId":anotherUser._id
+    });
+    navigate("/messenger", {replace:true});
+    
+
+
+  }
   const ProfileRightBar = () => {
     return (
       <>
@@ -76,6 +110,12 @@ export default function Rightbar({ user }) {
             {console.log(currentUser)}
             {followed ? "Unfollow" : "Follow"}
             {followed ? <RemoveIcon /> : <AddIcon />}
+          </button>
+        )}
+
+        {user.username !== currentUser.username && (
+          <button className="rightbarFollowButton" onClick={messageUser}>
+            Message
           </button>
         )}
         <h4 className="rightbarTitle">User information</h4>
