@@ -74,14 +74,14 @@ export default function Register() {
             <button className="loginButton" type="submit">
               Sign Up
             </button>
-            <button className="loginRegisterButton">
+            <center>
               <Link
                 to="/login"
                 style={{ textDecoration: "none", color: "white" }}
               >
-                Sign In
+                <button className="loginRegisterButton">Sign In</button>
               </Link>
-            </button>
+            </center>
           </form>
         </div>
       </div>

@@ -7,16 +7,16 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
 
-export default function Rightbar({ user}) {
+export default function Rightbar({ user }) {
   let navigate = useNavigate();
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [friends, setFriends] = useState([]);
-  const [anotherUser,setAnotherUser] = useState({});
+  const [anotherUser, setAnotherUser] = useState({});
   const { user: currentUser, dispatch } = useContext(AuthContext);
   const [onlineUsers, setOnlineUsers] = useState([]);
 
@@ -26,22 +26,21 @@ export default function Rightbar({ user}) {
 
   const [followed, setFollowed] = useState();
 
-
   useEffect(() => {
     console.log("from right bar " + currentUser._id);
     console.log(user);
     setFollowed(
-    (async function checkFollow() {
-      let isFollowing = await currentUser.followings.includes(user?._id);
-      return isFollowing;
-    })()
+      (async function checkFollow() {
+        let isFollowing = await currentUser.followings.includes(user?._id);
+        return isFollowing;
+      })()
     );
 
     const fetchUser = async () => {
       const res = await axios.get(`/users/?username=${user}`);
       setAnotherUser(res.data);
     };
-    fetchUser(); 
+    fetchUser();
   }, []);
 
   useEffect(() => {
@@ -83,7 +82,8 @@ export default function Rightbar({ user}) {
   const HomeRightBar = () => {
     return (
       <>
-        <h4 className="rightbarTitle">Online Friends</h4>
+        <img className="rightbarAd" src="assets/ad.jpg" alt="" />
+        {/* <h4 className="rightbarTitle">Online Friends</h4> */}
         <ul className="rightbarFriendList"></ul>
       </>
     );
@@ -93,14 +93,11 @@ export default function Rightbar({ user}) {
     console.log(currentUser._id);
     console.log(anotherUser._id);
     await axios.post(`/conversations/`, {
-        "senderId": currentUser._id,
-        "receiverId":anotherUser._id
+      senderId: currentUser._id,
+      receiverId: anotherUser._id,
     });
-    navigate("/messenger", {replace:true});
-    
-
-
-  }
+    navigate("/messenger", { replace: true });
+  };
   const ProfileRightBar = () => {
     return (
       <>
