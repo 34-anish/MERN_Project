@@ -88,7 +88,7 @@ export default function Share() {
             </div>
             <div className="shareOption">
               <EmojiEmotionsIcon htmlColor="goldenrod" className="shareIcon" />
-              <span className="shareOptionText">Feelings</span>
+              <span className="shareOptionText" >Feelings</span>
             </div>
           </div>
           <button className="shareButton" type="submit">

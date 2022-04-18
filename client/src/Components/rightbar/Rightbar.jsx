@@ -82,7 +82,7 @@ export default function Rightbar({ user }) {
   const HomeRightBar = () => {
     return (
       <>
-        <img className="rightbarAd" src="assets/ad.jpg" alt="" />
+        <img className="rightbarAd" src="assets/new.jpg" alt="" />
         {/* <h4 className="rightbarTitle">Online Friends</h4> */}
         <ul className="rightbarFriendList"></ul>
       </>

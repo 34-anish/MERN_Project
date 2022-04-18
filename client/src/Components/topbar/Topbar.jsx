@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import HomeIcon from '@mui/icons-material/Home';
+
 export default function Topbar() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -38,7 +39,7 @@ export default function Topbar() {
       <div className="topbarRight">
         <div className="topbarLinks">
           <Link to="/" style={linkStyle}>
-
+            
             <span className="topbarLink">Homepage</span>
           </Link>
           <Link to={"/profile/" + user.username} style={linkStyle}>
