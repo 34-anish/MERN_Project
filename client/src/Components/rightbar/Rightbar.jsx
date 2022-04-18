@@ -26,22 +26,25 @@ export default function Rightbar({ user }) {
 
   const [followed, setFollowed] = useState();
 
-  useEffect(() => {
-    console.log("from right bar " + currentUser._id);
-    console.log(user);
-    setFollowed(
-      (async function checkFollow() {
+
+  useEffect( function () {
+      console.log("from right bar " + currentUser._id);
+      console.log(user);
+      const fetchUser = async () => {
+        const res = await axios.get(`/users/?username=${user}`);
+        setAnotherUser(res.data);
+      };
+
+      let f = async () => {
         let isFollowing = await currentUser.followings.includes(user?._id);
         return isFollowing;
-      })()
-    );
+      };
+      f().then((d) => {
+        setFollowed(d);
+      }).catch(console.error);
 
-    const fetchUser = async () => {
-      const res = await axios.get(`/users/?username=${user}`);
-      setAnotherUser(res.data);
-    };
-    fetchUser();
-  }, []);
+      fetchUser();
+    }, []);
 
   useEffect(() => {
     const getFriends = async () => {
@@ -51,21 +54,21 @@ export default function Rightbar({ user }) {
       } catch (err) {
         console.log(err);
       }
-      console.log(followed);
     };
     getFriends();
-  }, [user]);
+  }, []);
 
   const handleClick = async () => {
     try {
+
       if (followed) {
         console.log("already followed");
-        await axios.put(`/users/${user._id}/unfollow`, {
+        await axios.put(`/users/${anotherUser._id}/unfollow`, {
           userId: currentUser._id,
         });
         dispatch({ type: "UNFOLLOW", payload: user._id });
       } else {
-        await axios.put(`/users/${user._id}/follow`, {
+        await axios.put(`/users/${anotherUser._id}/follow`, {
           userId: currentUser._id,
         });
         dispatch({ type: "FOLLOW", payload: user._id });
@@ -96,15 +99,22 @@ export default function Rightbar({ user }) {
       senderId: currentUser._id,
       receiverId: anotherUser._id,
     });
+<<<<<<< HEAD
     navigate("/messenger", { replace: true });
   };
   const ProfileRightBar = () => {
+=======
+    navigate("/messenger", {replace:true});
+    
+
+
+  }
+  const ProfileRightBar = ({followed}) => {
+>>>>>>> 045ee92 (bugfix for the button on profile which didn't allow to follow or unfollow :construction:)
     return (
       <>
         {user.username !== currentUser.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
-            {console.log(user)}
-            {console.log(currentUser)}
             {followed ? "Unfollow" : "Follow"}
             {followed ? <RemoveIcon /> : <AddIcon />}
           </button>
@@ -165,7 +175,7 @@ export default function Rightbar({ user }) {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
-        {user ? <ProfileRightBar /> : <HomeRightBar />}
+        {user ? <ProfileRightBar followed={followed}/> : <HomeRightBar />}
       </div>
     </div>
   );
