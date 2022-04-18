@@ -87,7 +87,15 @@ export default function Rightbar({ user }) {
   const HomeRightBar = () => {
     return (
       <>
-        <img className="rightbarAd" src="assets/new.jpg" alt="" />
+        <a href="https://www.mountaindew.com">
+        <img className="rightbarAd" src="assets/dew.jpg" alt=""/> 
+        </a>  
+        <a href="https://www.mercedes-benz.co.in/passengercars/mercedes-benz-cars/models/e-class/saloon-w213-fl/explore/comfort-teaser.module.html?utm_source=GoS&utm_medium=cpc&utm_campaign=U.C.MBC-E-Class.T.&utm_content=DCP_OneWeb_AO_Product%3fcsref%3dmc-sem_cn-IND_WS_MBC_Product_Individual_A_Class_Limousino_Exact_AO_ci-Google_si-g_pi-kwd-10095950_cri-575666072150_ai-mercedes%20benz%20e%20class%26kpid%3dgo_cmp-15918875401_adg-133594041298_ad-575666072150_kwd-10095950_dev-c_ext-&gclid=Cj0KCQjwmPSSBhCNARIsAH3cYgb6uIiZznDfTfUF_uHNOFxA1ki9JFH0m8uAsm0fu5uOlY-W1nrnVc8aAvVcEALw_wcB">
+        <img className="rightbarAd" src="assets/merecedes.jpg" alt="" />
+        </a>
+        <a href="https://nepatop.com.np/">
+        <img className="rightbarAd" src="assets/nepatop.jpg" alt="" />
+        </a>
         {/* <h4 className="rightbarTitle">Online Friends</h4> */}
         <ul className="rightbarFriendList"></ul>
       </>

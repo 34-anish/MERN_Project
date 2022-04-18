@@ -40,7 +40,7 @@ export default function Topbar() {
         <div className="topbarLinks">
           <Link to="/" style={linkStyle}>
             
-            <span className="topbarLink">Homepage</span>
+            <span className="topbarLink">Home</span>
           </Link>
           <Link to={"/profile/" + user.username} style={linkStyle}>
             <span className="topbarLink">Timeline</span>
