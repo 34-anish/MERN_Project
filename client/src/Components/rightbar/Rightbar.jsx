@@ -33,17 +33,19 @@ export default function Rightbar({ user }) {
       const fetchUser = async () => {
         const res = await axios.get(`/users/?username=${user}`);
         setAnotherUser(res.data);
+        return res.data._id 
       };
 
-      let f = async () => {
-        let isFollowing = await currentUser.followings.includes(user?._id);
-        return isFollowing;
-      };
-      f().then((d) => {
-        setFollowed(d);
-      }).catch(console.error);
+      fetchUser().then((d) => {
+        let f = async () => {
+          let isFollowing = await currentUser.followings.includes(d);
+          return isFollowing;
+        };
+        f().then((d) => {
+          setFollowed(d);
+        }).catch(console.error);
+      });
 
-      fetchUser();
     }, []);
 
   useEffect(() => {
@@ -60,18 +62,18 @@ export default function Rightbar({ user }) {
 
   const handleClick = async () => {
     try {
-
+      console.log(followed);
       if (followed) {
         console.log("already followed");
         await axios.put(`/users/${anotherUser._id}/unfollow`, {
           userId: currentUser._id,
         });
-        dispatch({ type: "UNFOLLOW", payload: user._id });
+        dispatch({ type: "UNFOLLOW", payload: anotherUser._id });
       } else {
         await axios.put(`/users/${anotherUser._id}/follow`, {
           userId: currentUser._id,
         });
-        dispatch({ type: "FOLLOW", payload: user._id });
+        dispatch({ type: "FOLLOW", payload: anotherUser._id });
         await axios.post(`/conversations/`, {
           senderId: currentUser._id,
           receiverId: user._id,
