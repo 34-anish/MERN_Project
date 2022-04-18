@@ -99,18 +99,10 @@ export default function Rightbar({ user }) {
       senderId: currentUser._id,
       receiverId: anotherUser._id,
     });
-<<<<<<< HEAD
-    navigate("/messenger", { replace: true });
-  };
-  const ProfileRightBar = () => {
-=======
     navigate("/messenger", {replace:true});
-    
-
-
   }
+
   const ProfileRightBar = ({followed}) => {
->>>>>>> 045ee92 (bugfix for the button on profile which didn't allow to follow or unfollow :construction:)
     return (
       <>
         {user.username !== currentUser.username && (
