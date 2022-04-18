@@ -51,7 +51,7 @@ export default function Rightbar({ user }) {
   useEffect(() => {
     const getFriends = async () => {
       try {
-        const friendList = await axios.get("/users/friends/" + user._id);
+        const friendList = await axios.get("/users/friends/" + currentUser._id);
         setFriends(friendList.data);
       } catch (err) {
         console.log(err);
@@ -107,19 +107,20 @@ export default function Rightbar({ user }) {
   const ProfileRightBar = ({followed}) => {
     return (
       <>
-        {user.username !== currentUser.username && (
+      
+        {anotherUser.username !== currentUser.username && (
           <button className="rightbarFollowButton" onClick={handleClick}>
             {followed ? "Unfollow" : "Follow"}
             {followed ? <RemoveIcon /> : <AddIcon />}
           </button>
         )}
 
-        {user.username !== currentUser.username && (
+        {anotherUser.username !== currentUser.username && (
           <button className="rightbarFollowButton" onClick={messageUser}>
             Message
           </button>
         )}
-        <h4 className="rightbarTitle">User information</h4>
+        {/* <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">City:</span>
@@ -139,7 +140,7 @@ export default function Rightbar({ user }) {
                 : "-"}
             </span>
           </div>
-        </div>
+        </div> */}
         <h4 className="rightbarTitle">Followings:</h4>
 
         {friends.map((friend) => (
@@ -166,11 +167,13 @@ export default function Rightbar({ user }) {
       </>
     );
   };
+//  if (anotherUser?._id == currentUser?._id) {
   return (
     <div className="rightbar">
       <div className="rightbarWrapper">
         {user ? <ProfileRightBar followed={followed}/> : <HomeRightBar />}
       </div>
-    </div>
+    </div> 
   );
+ // }
 }
