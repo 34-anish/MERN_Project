@@ -24,7 +24,7 @@
 .loginLogo {
   font-size: 50px;
   font-weight: 800;
-  color: #d33c2b;
+  color: #ca63e9cd;
   margin-bottom: 10px;
 }
 
@@ -76,7 +76,7 @@
   height: 50px;
   border-radius: 10px;
   border: none;
-  background-color: #d33c2b;
+  background-color: #ca63e9cd;
   color: white ;
   font-size: 20px;
   font-weight: 500;
